@@ -1,1103 +1,1558 @@
-<```html
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Conecta — Inclusão & Respeito</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #f7f7ff;
-      --card: #ffffff;
-      --text: #17172b;
-      --muted: #68687d;
-      --primary: #7c4dff;
-      --secondary: #ff4fa3;
-      --accent: #00c2a8;
-      --border: #e7e4f2;
-      --shadow: 0 15px 40px rgba(35, 25, 80, .10);
-    }
-
-    body.dark {
-      --bg: #11111d;
-      --card: #1c1c2c;
-      --text: #f5f3ff;
-      --muted: #aaa8bd;
-      --border: #303044;
-      --shadow: 0 15px 40px rgba(0, 0, 0, .30);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: .3s;
-    }
-
-    /* NAVBAR */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,.85);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    body.dark header {
-      background: rgba(17,17,29,.85);
-    }
-
-    nav {
-      max-width: 1200px;
-      margin: auto;
-      padding: 16px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    .logo span {
-      color: var(--secondary);
-    }
-
-    .menu {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-    }
-
-    .menu a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 700;
-      font-size: .95rem;
-    }
-
-    .menu a:hover {
-      color: var(--primary);
-    }
-
-    .theme-btn {
-      border: 0;
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.1rem;
-    }
-
-    /* HERO */
-
-    .hero {
-      max-width: 1200px;
-      margin: auto;
-      min-height: 620px;
-      padding: 80px 25px;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center;
-      gap: 50px;
-    }
-
-    .badge {
-      display: inline-block;
-      background: #eee8ff;
-      color: var(--primary);
-      padding: 8px 15px;
-      border-radius: 50px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    body.dark .badge {
-      background: #292340;
-    }
-
-    .hero h1 {
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: .95;
-      letter-spacing: -4px;
-      margin-bottom: 25px;
-    }
-
-    .gradient {
-      background: linear-gradient(
-        90deg,
-        var(--primary),
-        var(--secondary),
-        var(--accent)
-      );
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.15rem;
-      max-width: 600px;
-      line-height: 1.8;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 23px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 800;
-      display: inline-block;
-    }
-
-    .primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      box-shadow: 0 10px 25px rgba(124,77,255,.25);
-    }
-
-    .outline {
-      border: 2px solid var(--border);
-      color: var(--text);
-      background: var(--card);
-    }
-
-    .hero-card {
-      position: relative;
-      background: linear-gradient(145deg, #7c4dff, #ff4fa3);
-      min-height: 420px;
-      border-radius: 40px;
-      padding: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 25px 60px rgba(124,77,255,.25);
-      overflow: hidden;
-    }
-
-    .hero-card::before,
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,.15);
-    }
-
-    .hero-card::before {
-      width: 220px;
-      height: 220px;
-      top: -80px;
-      right: -50px;
-    }
-
-    .hero-card::after {
-      width: 150px;
-      height: 150px;
-      bottom: -50px;
-      left: -30px;
-    }
-
-    .people {
-      font-size: 7rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* SECTIONS */
-
-    section {
-      padding: 90px 25px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 45px;
-    }
-
-    .section-title h2 {
-      font-size: 2.7rem;
-      margin-bottom: 12px;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* CARDS */
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      padding: 30px;
-      box-shadow: var(--shadow);
-      transition: .25s;
-    }
-
-    .card:hover {
-      transform: translateY(-7px);
-    }
-
-    .icon {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 1.3rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* QUIZ */
-
-    #quizzes {
-      background: linear-gradient(
-        135deg,
-        rgba(124,77,255,.08),
-        rgba(255,79,163,.08)
-      );
-    }
-
-    .quiz {
-      max-width: 800px;
-      margin: auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 35px;
-      border-radius: 30px;
-      box-shadow: var(--shadow);
-    }
-
-    .quiz-top {
-      display: flex;
-      justify-content: space-between;
-      color: var(--muted);
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
-
-    .progress {
-      height: 8px;
-      background: var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 30px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: .3s;
-    }
-
-    .question {
-      font-size: 1.45rem;
-      font-weight: 800;
-      margin-bottom: 25px;
-    }
-
-    .answers {
-      display: grid;
-      gap: 12px;
-    }
-
-    .answer {
-      padding: 16px;
-      text-align: left;
-      background: var(--bg);
-      color: var(--text);
-      border: 2px solid var(--border);
-      border-radius: 15px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: .2s;
-    }
-
-    .answer:hover {
-      border-color: var(--primary);
-      transform: translateX(4px);
-    }
-
-    .answer.correct {
-      background: #d9f9ed;
-      border-color: #00a87d;
-      color: #087457;
-    }
-
-    .answer.wrong {
-      background: #ffe0e4;
-      border-color: #ef476f;
-      color: #b51f42;
-    }
-
-    .result {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .result h3 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-
-    /* PORTAL */
-
-    .portal {
-      max-width: 850px;
-      margin: auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 35px;
-      box-shadow: var(--shadow);
-    }
-
-    .field {
-      margin-bottom: 20px;
-    }
-
-    .field label {
-      display: block;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .field input,
-    .field textarea,
-    .field select {
-      width: 100%;
-      padding: 15px;
-      border-radius: 14px;
-      border: 2px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      outline: none;
-      font: inherit;
-    }
-
-    .field textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      border-color: var(--primary);
-    }
-
-    .anonymous {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 20px;
-      color: var(--muted);
-    }
-
-    /* TIPS */
-
-    .tips {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .tip {
-      padding: 25px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-    }
-
-    .tip strong {
-      color: var(--primary);
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #141421;
-      color: white;
-      padding: 45px 25px;
-      text-align: center;
-    }
-
-    footer h3 {
-      color: #ff4fa3;
-      margin-bottom: 10px;
-    }
-
-    footer p {
-      color: #aaa;
-    }
-
-    /* MOBILE */
-
-    @media(max-width: 850px) {
-      .menu a {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 50px;
-      }
-
-      .hero-card {
-        min-height: 300px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .tips {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        letter-spacing: -2px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Incluir+ | Inclusão e Respeito</title>
+
+    <style>
+        /* =========================
+           CONFIGURAÇÕES
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f8f7ff;
+            --card: #ffffff;
+            --text: #171525;
+            --text-light: #69677a;
+            --primary: #7657ff;
+            --secondary: #ff4fa3;
+            --cyan: #18c8b0;
+            --border: #e8e5f2;
+            --shadow: 0 15px 45px rgba(52, 37, 110, .12);
+        }
+
+        body.dark {
+            --bg: #10101b;
+            --card: #1b1b2b;
+            --text: #f8f7ff;
+            --text-light: #aaa8bd;
+            --border: #303044;
+            --shadow: 0 15px 45px rgba(0, 0, 0, .35);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .3s, color .3s;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255,255,255,.85);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        body.dark header {
+            background: rgba(16,16,27,.88);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 15px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .theme-btn {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+            border: 1px solid var(--border);
+
+            background: var(--card);
+            color: var(--text);
+
+            cursor: pointer;
+            font-size: 1.1rem;
+
+            transition: .2s;
+        }
+
+        .theme-btn:hover {
+            transform: rotate(15deg) scale(1.05);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            max-width: 1200px;
+            min-height: 650px;
+
+            margin: auto;
+            padding: 80px 25px;
+
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+
+            align-items: center;
+            gap: 60px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 9px 17px;
+
+            border-radius: 50px;
+
+            background: #eeeaff;
+            color: var(--primary);
+
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        body.dark .badge {
+            background: #292343;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            line-height: .92;
+
+            letter-spacing: -5px;
+
+            margin-bottom: 25px;
+        }
+
+        .gradient {
+            background: linear-gradient(
+                90deg,
+                var(--primary),
+                var(--secondary),
+                var(--cyan)
+            );
+
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 620px;
+
+            color: var(--text-light);
+
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 14px 23px;
+
+            border: none;
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .primary {
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+            box-shadow: 0 10px 25px rgba(118,87,255,.25);
+        }
+
+        .secondary-btn {
+            color: var(--text);
+
+            background: var(--card);
+
+            border: 2px solid var(--border);
+        }
+
+        /* HERO ART */
+
+        .hero-art {
+            min-height: 430px;
+
+            border-radius: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    #ffffff55,
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #7657ff,
+                    #ff4fa3
+                );
+
+            box-shadow:
+                0 30px 70px rgba(118,87,255,.28);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-art::before,
+        .hero-art::after {
+            content: "";
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.14);
+        }
+
+        .hero-art::before {
+            width: 250px;
+            height: 250px;
+
+            top: -80px;
+            right: -70px;
+        }
+
+        .hero-art::after {
+            width: 180px;
+            height: 180px;
+
+            bottom: -70px;
+            left: -50px;
+        }
+
+        .people {
+            font-size: 6rem;
+
+            line-height: 1.4;
+
+            text-align: center;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            padding: 90px 25px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+
+            max-width: 720px;
+
+            margin: 0 auto 45px;
+        }
+
+        .section-title h2 {
+            font-size: 2.7rem;
+
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 25px;
+
+            padding: 30px;
+
+            box-shadow: var(--shadow);
+
+            transition: .25s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           QUIZ
+        ========================= */
+
+        #quizzes {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(118,87,255,.08),
+                    rgba(255,79,163,.08)
+                );
+        }
+
+        .quiz-box {
+            max-width: 800px;
+
+            margin: auto;
+
+            padding: 35px;
+
+            border-radius: 30px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+
+            color: var(--text-light);
+
+            font-weight: 800;
+        }
+
+        .progress {
+            height: 9px;
+
+            background: var(--border);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            height: 100%;
+
+            width: 0%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            transition: .4s;
+        }
+
+        .question {
+            font-size: 1.4rem;
+
+            font-weight: 800;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
+        }
+
+        .answers {
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .answer {
+            width: 100%;
+
+            padding: 16px;
+
+            border-radius: 15px;
+
+            border: 2px solid var(--border);
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            text-align: left;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            font-weight: 700;
+
+            transition: .2s;
+        }
+
+        .answer:hover {
+            border-color: var(--primary);
+
+            transform: translateX(5px);
+        }
+
+        .answer.correct {
+            background: #d8f8eb;
+
+            border-color: #0ba47d;
+
+            color: #087052;
+        }
+
+        .answer.wrong {
+            background: #ffe1e7;
+
+            border-color: #ed4568;
+
+            color: #a82042;
+        }
+
+        .result {
+            text-align: center;
+
+            padding: 20px;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+
+            margin-bottom: 15px;
+        }
+
+        .result h3 {
+            font-size: 2rem;
+
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            color: var(--text-light);
+
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           PORTAL DE ESCUTA
+        ========================= */
+
+        .portal {
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 35px;
+
+            border-radius: 30px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            box-shadow: var(--shadow);
+        }
+
+        .anonymous {
+            display: flex;
+
+            gap: 10px;
+
+            align-items: center;
+
+            color: var(--text-light);
+
+            margin-bottom: 25px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            border: 2px solid var(--border);
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            outline: none;
+
+            font: inherit;
+        }
+
+        .field textarea {
+            min-height: 160px;
+
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+            border-color: var(--primary);
+        }
+
+        .success {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+            background: #d9f9ed;
+
+            color: #087052;
+
+            font-weight: 800;
+        }
+
+        /* =========================
+           DICAS
+        ========================= */
+
+        .tips {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .tip {
+            padding: 25px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            color: var(--text-light);
+
+            line-height: 1.6;
+        }
+
+        .tip strong {
+            color: var(--primary);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 50px 25px;
+
+            text-align: center;
+
+            background: #141421;
+
+            color: white;
+        }
+
+        footer h2 {
+            color: #ff4fa3;
+
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #aaa;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 850px) {
+
+            .nav-links a {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                padding-top: 50px;
+            }
+
+            .hero-art {
+                min-height: 300px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tips {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-  <nav>
-    <div class="logo">
-      Conecta<span>.</span>
-    </div>
-
-    <div class="menu">
-      <a href="#inicio">Início</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#quizzes">Quizzes</a>
-      <a href="#escuta">Escuta</a>
-
-      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
-        🌙
-      </button>
-    </div>
-  </nav>
-</header>
+    <!-- =========================
+         MENU
+    ========================== -->
 
+    <header>
 
-<!-- HERO -->
+        <nav>
 
-<section class="hero" id="inicio">
+            <div class="logo">
+                Incluir<span>+</span>
+            </div>
 
-  <div>
-    <span class="badge">🌈 Diversidade • Respeito • Inclusão</span>
+            <div class="nav-links">
 
-    <h1>
-      Ser diferente
-      <span class="gradient">é fazer parte.</span>
-    </h1>
+                <a href="#inicio">Início</a>
 
-    <p>
-      Um espaço jovem para aprender, conversar e transformar
-      diferenças em respeito. Aqui, cada pessoa tem voz,
-      história e lugar.
-    </p>
+                <a href="#sobre">Sobre</a>
 
-    <div class="buttons">
-      <a href="#quizzes" class="btn primary">
-        🧠 Fazer um quiz
-      </a>
+                <a href="#quizzes">Quizzes</a>
 
-      <a href="#escuta" class="btn outline">
-        💬 Quero falar
-      </a>
-    </div>
-  </div>
+                <a href="#escuta">Portal de Escuta</a>
 
-  <div class="hero-card">
-    <div class="people">
-      🧑🏽‍🦽 🧑🏻‍🦱 🧕🏽<br>
-      🧑🏿‍🦰 🧑🏼‍🎨 🧑🏻‍🦯
-    </div>
-  </div>
+                <button
+                    class="theme-btn"
+                    id="themeBtn"
+                    onclick="toggleTheme()"
+                    aria-label="Alterar tema"
+                >
+                    🌙
+                </button>
 
-</section>
+            </div>
 
+        </nav>
 
-<!-- SOBRE -->
+    </header>
 
-<section id="sobre">
 
-  <div class="container">
+    <!-- =========================
+         HERO
+    ========================== -->
 
-    <div class="section-title">
-      <h2>Por que falar sobre isso?</h2>
+    <section class="hero" id="inicio">
 
-      <p>
-        Inclusão não é apenas aceitar diferenças.
-        É criar ambientes onde todas as pessoas possam
-        participar, serem respeitadas e se sentir pertencentes.
-      </p>
-    </div>
+        <div>
 
-    <div class="cards">
+            <span class="badge">
+                🌈 Diversidade • Respeito • Inclusão
+            </span>
 
-      <div class="card">
-        <div class="icon">🫶</div>
-        <h3>Respeito</h3>
-        <p>
-          Valorize histórias, culturas, corpos, identidades,
-          opiniões e formas diferentes de viver.
-        </p>
-      </div>
+            <h1>
+                Todo mundo
+                <span class="gradient">
+                    tem lugar.
+                </span>
+            </h1>
 
-      <div class="card">
-        <div class="icon">🤝</div>
-        <h3>Inclusão</h3>
-        <p>
-          Criar oportunidades para que todas as pessoas
-          possam participar de verdade.
-        </p>
-      </div>
+            <p>
+                O <strong>Incluir+</strong> é um espaço para aprender,
+                refletir, conversar e construir uma sociedade onde
+                as diferenças sejam respeitadas e valorizadas.
+            </p>
 
-      <div class="card">
-        <div class="icon">🗣️</div>
-        <h3>Escuta</h3>
-        <p>
-          Ouvir também é uma forma de cuidar.
-          Toda experiência merece ser considerada.
-        </p>
-      </div>
+            <div class="buttons">
 
-    </div>
+                <a
+                    href="#quizzes"
+                    class="btn primary"
+                >
+                    🧠 Fazer um quiz
+                </a>
 
-  </div>
+                <a
+                    href="#escuta"
+                    class="btn secondary-btn"
+                >
+                    💬 Quero ser ouvido
+                </a>
 
-</section>
-
-
-<!-- QUIZZES -->
-
-<section id="quizzes">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>🧠 Quiz da Inclusão</h2>
-
-      <p>
-        Teste seus conhecimentos e descubra como
-        pequenas atitudes podem fazer diferença.
-      </p>
-    </div>
-
-    <div class="quiz">
-
-      <div id="quizContent"></div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PORTAL DE ESCUTA -->
-
-<section id="escuta">
-
-  <div class="container">
-
-    <div class="section-title">
-
-      <h2>💬 Portal de Escuta</h2>
-
-      <p>
-        Quer compartilhar uma experiência, sugestão ou
-        situação que precisa ser ouvida?
-      </p>
-
-    </div>
-
-    <form class="portal" onsubmit="sendMessage(event)">
-
-      <div class="anonymous">
-        <input type="checkbox" id="anonymous" checked>
-        <label for="anonymous">
-          Quero enviar minha mensagem anonimamente
-        </label>
-      </div>
-
-      <div class="field" id="nameField" style="display:none;">
-        <label>Seu nome</label>
-        <input
-          type="text"
-          id="name"
-          placeholder="Digite seu nome"
-        >
-      </div>
-
-      <div class="field">
-
-        <label>Assunto</label>
-
-        <select>
-          <option>Experiência de inclusão</option>
-          <option>Preconceito ou discriminação</option>
-          <option>Sugestão</option>
-          <option>Outro</option>
-        </select>
-
-      </div>
-
-      <div class="field">
-
-        <label>O que você gostaria de compartilhar?</label>
-
-        <textarea
-          id="message"
-          required
-          placeholder="Escreva aqui. Este é um espaço de respeito e acolhimento..."
-        ></textarea>
-
-      </div>
-
-      <button class="btn primary">
-        🚀 Enviar mensagem
-      </button>
-
-      <p
-        id="success"
-        style="
-          display:none;
-          margin-top:18px;
-          color:#00a87d;
-          font-weight:bold;
-        "
-      >
-        ✅ Obrigado por compartilhar. Sua mensagem foi registrada
-        neste protótipo.
-      </p>
-
-    </form>
-
-  </div>
-
-</section>
-
-
-<!-- ATITUDES -->
-
-<section>
-
-  <div class="container">
-
-    <div class="section-title">
-
-      <h2>✨ Faça a diferença</h2>
-
-      <p>
-        Algumas atitudes simples podem tornar qualquer ambiente
-        mais acolhedor.
-      </p>
-
-    </div>
-
-    <div class="tips">
-
-      <div class="tip">
-        👂 <strong>Escute de verdade.</strong>
-        Não interrompa ou diminua a experiência de outra pessoa.
-      </div>
-
-      <div class="tip">
-        🗣️ <strong>Use palavras respeitosas.</strong>
-        Evite comentários e piadas que possam machucar.
-      </div>
-
-      <div class="tip">
-        ♿ <strong>Pense em acessibilidade.</strong>
-        Um espaço inclusivo precisa considerar diferentes necessidades.
-      </div>
-
-      <div class="tip">
-        🤔 <strong>Questione seus preconceitos.</strong>
-        Aprender também significa reconhecer e corrigir erros.
-      </div>
-
-      <div class="tip">
-        🤝 <strong>Inclua outras pessoas.</strong>
-        Convide, pergunte e abra espaço para novas vozes.
-      </div>
-
-      <div class="tip">
-        🌱 <strong>Continue aprendendo.</strong>
-        Respeito é uma construção diária.
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<footer>
-
-  <h3>Conecta. 🌈</h3>
-
-  <p>
-    Inclusão começa quando todas as pessoas têm espaço para ser quem são.
-  </p>
-
-  <br>
-
-  <small>
-    Projeto educativo sobre inclusão e respeito às diferenças.
-  </small>
-
-</footer>
-
-
-<script>
-
-  /* ==========================
-     MODO CLARO / ESCURO
-  ========================== */
-
-  function toggleTheme() {
-
-    document.body.classList.toggle("dark");
-
-    const button = document.getElementById("themeBtn");
-
-    if (document.body.classList.contains("dark")) {
-      button.innerHTML = "☀️";
-      localStorage.setItem("theme", "dark");
-    } else {
-      button.innerHTML = "🌙";
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-
-  /* Recupera tema salvo */
-
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
-    document.getElementById("themeBtn").innerHTML = "☀️";
-  }
-
-
-  /* ==========================
-     QUIZ
-  ========================== */
-
-  const questions = [
-
-    {
-      question:
-        "Você presencia uma piada preconceituosa. Qual atitude é mais inclusiva?",
-
-      answers: [
-        "Rir para não criar problema.",
-        "Ignorar completamente.",
-        "Dizer que a piada é desrespeitosa.",
-        "Contar a mesma piada para outra pessoa."
-      ],
-
-      correct: 2
-    },
-
-    {
-      question:
-        "Uma pessoa com deficiência precisa de ajuda. O que fazer?",
-
-      answers: [
-        "Ajudar sem perguntar.",
-        "Perguntar se ela precisa de ajuda.",
-        "Fingir que não percebeu.",
-        "Decidir por ela."
-      ],
-
-      correct: 1
-    },
-
-    {
-      question:
-        "O que significa inclusão?",
-
-      answers: [
-        "Tratar todas as pessoas exatamente da mesma forma.",
-        "Separar grupos diferentes.",
-        "Garantir participação, respeito e oportunidades.",
-        "Evitar falar sobre diferenças."
-      ],
-
-      correct: 2
-    },
-
-    {
-      question:
-        "Você conhece uma pessoa com uma cultura diferente da sua. O melhor é:",
-
-      answers: [
-        "Fazer suposições.",
-        "Evitar conversar.",
-        "Perguntar e aprender com respeito.",
-        "Dizer que sua cultura é melhor."
-      ],
-
-      correct: 2
-    },
-
-    {
-      question:
-        "Qual dessas atitudes ajuda na construção de um ambiente inclusivo?",
-
-      answers: [
-        "Escutar diferentes opiniões.",
-        "Excluir quem pensa diferente.",
-        "Fazer brincadeiras sobre diferenças.",
-        "Ignorar situações de preconceito."
-      ],
-
-      correct: 0
-    }
-
-  ];
-
-
-  let currentQuestion = 0;
-  let score = 0;
-
-
-  function loadQuestion() {
-
-    const container =
-      document.getElementById("quizContent");
-
-    if (currentQuestion >= questions.length) {
-
-      const percentage =
-        Math.round(
-          (score / questions.length) * 100
-        );
-
-      container.innerHTML = `
-
-        <div class="result">
-
-          <div style="font-size:4rem;">
-            ${percentage >= 80 ? "🏆" : "🌱"}
-          </div>
-
-          <h3>Quiz concluído!</h3>
-
-          <p>
-            Você acertou
-            <strong>${score}</strong>
-            de
-            <strong>${questions.length}</strong>
-            perguntas.
-          </p>
-
-          <br>
-
-          <button
-            class="btn primary"
-            onclick="restartQuiz()"
-          >
-            🔄 Fazer novamente
-          </button>
+            </div>
 
         </div>
 
-      `;
 
-      return;
-    }
+        <div class="hero-art">
 
+            <div class="people">
 
-    const q = questions[currentQuestion];
+                🧑🏽‍🦽 🧑🏻‍🦱 🧕🏽
 
+                <br>
 
-    container.innerHTML = `
+                🧑🏿‍🦰 🧑🏼‍🎨 🧑🏻‍🦯
 
-      <div class="quiz-top">
+            </div>
 
-        <span>
-          Questão ${currentQuestion + 1}
-          de ${questions.length}
-        </span>
+        </div>
 
-        <span>
-          ⭐ ${score} pontos
-        </span>
-
-      </div>
+    </section>
 
 
-      <div class="progress">
+    <!-- =========================
+         SOBRE
+    ========================== -->
 
-        <div
-          class="progress-bar"
-          style="
-            width:
-            ${(currentQuestion / questions.length) * 100}%
-          "
-        ></div>
+    <section id="sobre">
 
-      </div>
+        <div class="container">
 
+            <div class="section-title">
 
-      <div class="question">
-        ${q.question}
-      </div>
+                <h2>
+                    O que significa incluir?
+                </h2>
 
+                <p>
+                    Inclusão é garantir que diferentes pessoas
+                    tenham espaço, respeito, acessibilidade,
+                    participação e oportunidades.
+                </p>
 
-      <div class="answers">
-
-        ${q.answers.map((answer, index) => `
-
-          <button
-            class="answer"
-            onclick="selectAnswer(${index})"
-          >
-            ${answer}
-          </button>
-
-        `).join("")}
-
-      </div>
-    `;
-  }
+            </div>
 
 
-  function selectAnswer(index) {
+            <div class="cards">
 
-    const q = questions[currentQuestion];
+                <div class="card">
 
-    const buttons =
-      document.querySelectorAll(".answer");
+                    <div class="icon">
+                        🫶
+                    </div>
 
-    buttons.forEach(button => {
-      button.disabled = true;
-    });
+                    <h3>
+                        Respeito
+                    </h3>
 
+                    <p>
+                        Valorizar pessoas, histórias, culturas,
+                        corpos, identidades e opiniões diferentes.
+                    </p>
 
-    if (index === q.correct) {
-
-      buttons[index].classList.add("correct");
-
-      score++;
-
-    } else {
-
-      buttons[index].classList.add("wrong");
-
-      buttons[q.correct].classList.add("correct");
-
-    }
+                </div>
 
 
-    setTimeout(() => {
+                <div class="card">
 
-      currentQuestion++;
+                    <div class="icon">
+                        🤝
+                    </div>
 
-      loadQuestion();
+                    <h3>
+                        Inclusão
+                    </h3>
 
-    }, 900);
-  }
+                    <p>
+                        Criar ambientes onde todas as pessoas
+                        possam participar e se sentir pertencentes.
+                    </p>
 
-
-  function restartQuiz() {
-
-    currentQuestion = 0;
-    score = 0;
-
-    loadQuestion();
-
-  }
+                </div>
 
 
-  loadQuestion();
+                <div class="card">
+
+                    <div class="icon">
+                        🗣️
+                    </div>
+
+                    <h3>
+                        Escuta
+                    </h3>
+
+                    <p>
+                        Ouvir experiências diferentes das nossas
+                        é uma das formas de construir empatia.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
-  /* ==========================
-     PORTAL DE ESCUTA
-  ========================== */
+    <!-- =========================
+         QUIZ
+    ========================== -->
 
-  const anonymous =
-    document.getElementById("anonymous");
+    <section id="quizzes">
 
-  anonymous.addEventListener("change", function() {
+        <div class="container">
 
-    document.getElementById("nameField").style.display =
-      this.checked ? "none" : "block";
+            <div class="section-title">
 
-  });
+                <h2>
+                    🧠 Quiz Incluir+
+                </h2>
+
+                <p>
+                    Teste seus conhecimentos sobre respeito,
+                    diversidade e inclusão.
+                </p>
+
+            </div>
 
 
-  function sendMessage(event) {
+            <div class="quiz-box">
 
-    event.preventDefault();
+                <div id="quizContent"></div>
 
-    document.getElementById("success").style.display =
-      "block";
+            </div>
 
-    document.getElementById("message").value = "";
+        </div>
 
-  }
+    </section>
 
-</script>
+
+    <!-- =========================
+         PORTAL DE ESCUTA
+    ========================== -->
+
+    <section id="escuta">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    💬 Portal de Escuta
+                </h2>
+
+                <p>
+                    Este espaço foi criado para você compartilhar
+                    experiências, sugestões ou situações que
+                    precisam ser ouvidas.
+                </p>
+
+            </div>
+
+
+            <form
+                class="portal"
+                onsubmit="sendMessage(event)"
+            >
+
+                <div class="anonymous">
+
+                    <input
+                        type="checkbox"
+                        id="anonymous"
+                        checked
+                    >
+
+                    <label for="anonymous">
+                        Quero enviar anonimamente
+                    </label>
+
+                </div>
+
+
+                <div
+                    class="field"
+                    id="nameField"
+                    style="display:none;"
+                >
+
+                    <label>
+                        Seu nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Digite seu nome"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Assunto
+                    </label>
+
+                    <select>
+
+                        <option>
+                            Experiência de inclusão
+                        </option>
+
+                        <option>
+                            Preconceito ou discriminação
+                        </option>
+
+                        <option>
+                            Sugestão para o Incluir+
+                        </option>
+
+                        <option>
+                            Outro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Sua mensagem
+                    </label>
+
+                    <textarea
+                        id="message"
+                        required
+                        placeholder="Conte o que aconteceu ou o que você gostaria de compartilhar..."
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn primary"
+                >
+                    🚀 Enviar mensagem
+                </button>
+
+
+                <div
+                    class="success"
+                    id="success"
+                >
+                    ✅ Obrigado por compartilhar!
+                    Sua mensagem foi registrada neste protótipo.
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DICAS
+    ========================== -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    ✨ Pequenas atitudes
+                </h2>
+
+                <p>
+                    Inclusão também acontece nas escolhas
+                    que fazemos todos os dias.
+                </p>
+
+            </div>
+
+
+            <div class="tips">
+
+                <div class="tip">
+                    👂
+                    <strong>Escute:</strong>
+                    permita que outras pessoas contem suas
+                    experiências sem minimizar seus sentimentos.
+                </div>
+
+                <div class="tip">
+                    🗣️
+                    <strong>Respeite:</strong>
+                    evite comentários, apelidos ou piadas
+                    que possam desrespeitar alguém.
+                </div>
+
+                <div class="tip">
+                    ♿
+                    <strong>Pense em acessibilidade:</strong>
+                    considere diferentes necessidades antes
+                    de planejar um espaço ou atividade.
+                </div>
+
+                <div class="tip">
+                    🤔
+                    <strong>Questione preconceitos:</strong>
+                    reconhecer nossos próprios preconceitos
+                    é parte do processo de aprendizado.
+                </div>
+
+                <div class="tip">
+                    🤝
+                    <strong>Abra espaço:</strong>
+                    incentive diferentes pessoas a participar
+                    e compartilhar suas ideias.
+                </div>
+
+                <div class="tip">
+                    🌱
+                    <strong>Continue aprendendo:</strong>
+                    inclusão é uma construção diária.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <h2>
+            Incluir+ 🌈
+        </h2>
+
+        <p>
+            Diferentes por natureza.
+            Juntos pelo respeito.
+        </p>
+
+        <br>
+
+        <small>
+            Projeto educativo sobre inclusão e respeito às diferenças.
+        </small>
+
+    </footer>
+
+
+    <script>
+
+        /* ==================================
+           MODO CLARO / MODO ESCURO
+        ================================== */
+
+        function toggleTheme() {
+
+            document.body.classList.toggle("dark");
+
+            const button =
+                document.getElementById("themeBtn");
+
+            if (
+                document.body.classList.contains("dark")
+            ) {
+
+                button.textContent = "☀️";
+
+                localStorage.setItem(
+                    "incluirTheme",
+                    "dark"
+                );
+
+            } else {
+
+                button.textContent = "🌙";
+
+                localStorage.setItem(
+                    "incluirTheme",
+                    "light"
+                );
+            }
+        }
+
+
+        /* Recuperar tema salvo */
+
+        const savedTheme =
+            localStorage.getItem("incluirTheme");
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add("dark");
+
+            document.getElementById(
+                "themeBtn"
+            ).textContent = "☀️";
+        }
+
+
+        /* ==================================
+           QUIZ
+        ================================== */
+
+        const questions = [
+
+            {
+                question:
+                    "Você presencia uma piada preconceituosa. Qual atitude é mais inclusiva?",
+
+                answers: [
+                    "Rir para não criar problemas.",
+                    "Ignorar completamente.",
+                    "Dizer que a piada é desrespeitosa.",
+                    "Contar a piada para outras pessoas."
+                ],
+
+                correct: 2
+            },
+
+
+            {
+                question:
+                    "Uma pessoa com deficiência parece precisar de ajuda. O que você deve fazer?",
+
+                answers: [
+                    "Ajudar sem perguntar.",
+                    "Perguntar se ela precisa de ajuda.",
+                    "Ignorar.",
+                    "Decidir por ela."
+                ],
+
+                correct: 1
+            },
+
+
+            {
+                question:
+                    "O que significa inclusão?",
+
+                answers: [
+                    "Separar pessoas diferentes.",
+                    "Evitar falar sobre diferenças.",
+                    "Garantir participação, respeito e oportunidades.",
+                    "Tratar todas as pessoas de maneira exatamente igual em qualquer situação."
+                ],
+
+                correct: 2
+            },
+
+
+            {
+                question:
+                    "Você conhece uma cultura diferente da sua. Qual atitude demonstra respeito?",
+
+                answers: [
+                    "Fazer suposições.",
+                    "Dizer que sua cultura é melhor.",
+                    "Evitar conversar.",
+                    "Perguntar e aprender com respeito."
+                ],
+
+                correct: 3
+            },
+
+
+            {
+                question:
+                    "Qual atitude ajuda a construir um ambiente inclusivo?",
+
+                answers: [
+                    "Escutar opiniões diferentes.",
+                    "Excluir quem pensa diferente.",
+                    "Fazer brincadeiras sobre diferenças.",
+                    "Ignorar situações de preconceito."
+                ],
+
+                correct: 0
+            }
+
+        ];
+
+
+        let currentQuestion = 0;
+
+        let score = 0;
+
+
+        function loadQuestion() {
+
+            const container =
+                document.getElementById(
+                    "quizContent"
+                );
+
+
+            if (
+                currentQuestion >=
+                questions.length
+            ) {
+
+                const percentage =
+                    Math.round(
+                        score /
+                        questions.length *
+                        100
+                    );
+
+
+                let icon =
+                    percentage >= 80
+                        ? "🏆"
+                        : "🌱";
+
+
+                container.innerHTML = `
+
+                    <div class="result">
+
+                        <div class="result-icon">
+                            ${icon}
+                        </div>
+
+                        <h3>
+                            Quiz concluído!
+                        </h3>
+
+                        <p>
+                            Você acertou
+                            <strong>${score}</strong>
+                            de
+                            <strong>${questions.length}</strong>
+                            perguntas.
+                        </p>
+
+                        <button
+                            class="btn primary"
+                            onclick="restartQuiz()"
+                        >
+                            🔄 Tentar novamente
+                        </button>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            const q =
+                questions[currentQuestion];
+
+
+            const progress =
+                (
+                    currentQuestion /
+                    questions.length
+                ) * 100;
+
+
+            container.innerHTML = `
+
+                <div class="quiz-header">
+
+                    <span>
+                        Questão
+                        ${currentQuestion + 1}
+                        de
+                        ${questions.length}
+                    </span>
+
+                    <span>
+                        ⭐ ${score}
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width:${progress}%"
+                    ></div>
+
+                </div>
+
+
+                <div class="question">
+
+                    ${q.question}
+
+                </div>
+
+
+                <div class="answers">
+
+                    ${q.answers.map(
+                        (answer, index) => `
+
+                            <button
+                                class="answer"
+                                onclick="selectAnswer(${index})"
+                            >
+                                ${answer}
+                            </button>
+
+                        `
+                    ).join("")}
+
+                </div>
+
+            `;
+        }
+
+
+        function selectAnswer(index) {
+
+            const q =
+                questions[currentQuestion];
+
+
+            const buttons =
+                document.querySelectorAll(
+                    ".answer"
+                );
+
+
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
+
+
+            if (
+                index === q.correct
+            ) {
+
+                buttons[index]
+                    .classList
+                    .add("correct");
+
+                score++;
+
+            } else {
+
+                buttons[index]
+                    .classList
+                    .add("wrong");
+
+                buttons[q.correct]
+                    .classList
+                    .add("correct");
+            }
+
+
+            setTimeout(() => {
+
+                currentQuestion++;
+
+                loadQuestion();
+
+            }, 900);
+        }
+
+
+        function restartQuiz() {
+
+            currentQuestion = 0;
+
+            score = 0;
+
+            loadQuestion();
+        }
+
+
+        loadQuestion();
+
+
+        /* ==================================
+           PORTAL DE ESCUTA
+        ================================== */
+
+        const anonymous =
+            document.getElementById(
+                "anonymous"
+            );
+
+
+        anonymous.addEventListener(
+            "change",
+            function() {
+
+                const nameField =
+                    document.getElementById(
+                        "nameField"
+                    );
+
+
+                nameField.style.display =
+                    this.checked
+                        ? "none"
+                        : "block";
+            }
+        );
+
+
+        function sendMessage(event) {
+
+            event.preventDefault();
+
+
+            document.getElementById(
+                "success"
+            ).style.display = "block";
+
+
+            document.getElementById(
+                "message"
+            ).value = "";
+
+        }
+
+    </script>
 
 </body>
 </html>
 ```
+
